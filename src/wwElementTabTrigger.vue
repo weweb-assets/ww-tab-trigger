@@ -1,12 +1,8 @@
 <template>
-    <div class="ww-tab-trigger-container" @click="handleClick">
-        <wwElement class="ww-tab-trigger" v-bind="content.tabTriggerElement" />
-    </div>
+    <wwLayout path="tabTriggerElement" @click="handleClick" />
 </template>
 
 <script>
-import { computed, ref } from 'vue';
-
 export default {
     props: {
         content: { type: Object, required: true },
@@ -41,12 +37,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.ww-tab-trigger-container {
-    background-color: red;
-    padding: 10px;
-
-    .ww-tab-trigger {
-        background-color: blue;
-    }
-}
 </style>

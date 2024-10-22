@@ -19,10 +19,7 @@ export default {
         },
         tabTriggerElement: {
             hidden: true,
-            defaultValue: {
-                isWwObject: true,
-                type: 'ww-text', // Button
-            }
+            defaultValue: []
         },
     },
 };
