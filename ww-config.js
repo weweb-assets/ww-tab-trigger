@@ -9,6 +9,7 @@ export default {
         },
         customSettingsPropertiesOrder: [],
     },
+    states: ['active', 'focus'],
     properties: {
         name: {
             label: {
