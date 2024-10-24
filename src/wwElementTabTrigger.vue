@@ -49,9 +49,10 @@ export default {
             this.setActiveTab(this.content.name);
         },
         handleFocus() {
-            console.log('handleFocus ', this.content.name);
+            console.log('handleFocus ', this.content.name, this.activationMode);
             this.isFocused = true;
-            if (this.activationMode === 'focus') {
+            this.setFocusTab(this.content.name);
+            if (this.activationMode === 'auto') {
                 this.setActiveTab(this.content.name);
             }
         },
@@ -60,7 +61,7 @@ export default {
             this.isFocused = false;
         },
     },
-    inject: ['setActiveTab', 'activeTabProvided', 'registerTabTrigger', 'activationMode'],
+    inject: ['setActiveTab', 'activeTabProvided', 'registerTabTrigger', 'activationMode', 'setFocusTab'],
 };
 </script>
 
