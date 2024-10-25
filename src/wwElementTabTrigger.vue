@@ -1,6 +1,13 @@
 <template>
     <wwLayoutItemContext is-repeat :index="1" :data="{ active: isSelected }">
-        <button ref="tabButton" role="tab" :aria-selected="isSelected" @click="handleClick" @focus="handleFocus" @blur="handleBlur">
+        <button
+            ref="tabButton"
+            role="tab"
+            :aria-selected="isSelected"
+            @click="handleClick"
+            @focus="handleFocus"
+            @blur="handleBlur"
+        >
             <wwLayout v-bind="$attrs" path="tabTriggerElement" />
         </button>
     </wwLayoutItemContext>
@@ -69,9 +76,17 @@ export default {
         handleBlur() {
             console.log('handleBlur ', this.content.name);
             this.isFocused = false;
+            this.onBlurTab(this.content.name);
         },
     },
-    inject: ['setActiveTab', 'activeTabProvided', 'registerTabTrigger', 'activationMode', 'setFocusTab'],
+    inject: [
+        'setActiveTab', 
+        'activeTabProvided', 
+        'registerTabTrigger', 
+        'activationMode', 
+        'setFocusTab', 
+        'onBlurTab'
+        ],
 };
 </script>
 
