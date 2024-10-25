@@ -14,6 +14,10 @@
 </template>
 
 <script>
+/* wwEditor:start */
+import useTabTriggerHint from './editor/useTabTriggerHint';
+/* wwEditor:end */
+
 export default {
     props: {
         content: { type: Object, required: true },
@@ -24,15 +28,43 @@ export default {
         wwElementState: { type: Object, required: true },
     },
     emits: [],
-    setup(props) {},
+    setup(props, { emit }) {
+        /* wwEditor:start */
+        useTabTriggerHint(emit);
+        /* wwEditor:end */
+    },
     data() {
         return {
             isFocused: false,
+            /* wwEditor:start */
+            isMounted: false,
+            /* wwEditor:end */
         };
     },
     computed: {
         isSelected() {
             return this.activeTabProvided === this.content.name;
+        },
+        /* wwEditor:start */
+        currentName() {
+            return this.content.name;
+        },
+        /* wwEditor:end */
+    },
+    methods: {
+        handleClick() {
+            this.setActiveTab(this.content.name);
+        },
+        handleFocus() {
+            this.isFocused = true;
+            this.setFocusTab(this.content.name);
+            if (this.activationMode === 'auto') {
+                this.setActiveTab(this.content.name);
+            }
+        },
+        handleBlur() {
+            this.isFocused = false;
+            this.onBlurTab(this.content.name);
         },
     },
     watch: {
@@ -56,34 +88,38 @@ export default {
                 }
             },
         },
+        /* wwEditor:start */
+        currentName: {
+            immediate: true,
+            handler(newValue, oldValue) {
+                this.isMounted ? this.changeTabName(oldValue, newValue) : null;
+            },
+        },
+        /* wwEditor:end */
     },
     mounted() {
         this.registerTabTrigger(this.content.name, this.$refs.tabButton);
+        /* wwEditor:start */
+        this.isMounted = true;
+        /* wwEditor:end */
     },
-    methods: {
-        handleClick() {
-            this.setActiveTab(this.content.name);
-        },
-        handleFocus() {
-            this.isFocused = true;
-            this.setFocusTab(this.content.name);
-            if (this.activationMode === 'auto') {
-                this.setActiveTab(this.content.name);
-            }
-        },
-        handleBlur() {
-            this.isFocused = false;
-            this.onBlurTab(this.content.name);
-        },
+    unmounted() {
+        /* wwEditor:start */
+        this.unregisterTabTrigger(this.content.name);
+        /* wwEditor:end */
     },
     inject: [
-        'setActiveTab', 
-        'activeTabProvided', 
-        'registerTabTrigger', 
-        'activationMode', 
-        'setFocusTab', 
-        'onBlurTab'
-        ],
+        'setActiveTab',
+        'activeTabProvided',
+        'registerTabTrigger',
+        /* wwEditor:start */
+        'unregisterTabTrigger',
+        'changeTabName',
+        /* wwEditor:end */
+        'activationMode',
+        'setFocusTab',
+        'onBlurTab',
+    ],
 };
 </script>
 

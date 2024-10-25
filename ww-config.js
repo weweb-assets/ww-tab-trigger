@@ -8,6 +8,15 @@ export default {
             icon: 'slider',     // 📛 TODO
         },
         customSettingsPropertiesOrder: [],
+        hint: (_, sidepanelContent) => {
+            if(sidepanelContent.missingTabOrField) {
+                return {
+                    type: 'warning',
+                    header: sidepanelContent.missingTabOrField.header,
+                    text: sidepanelContent.missingTabOrField.text,
+                };
+            }
+        },
     },
     states: ['active', 'focus'],
     properties: {
@@ -22,5 +31,12 @@ export default {
             hidden: true,
             defaultValue: []
         },
+        /* wwEditor:start */
+        missingTabOrField: {
+            hidden: true,
+            defaultValue: false,
+            editorOnly: true,
+        },
+        /* wwEditor:end */
     },
 };
