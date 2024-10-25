@@ -39,6 +39,16 @@ export default {
                 }
             },
         },
+        isFocused: {
+            immediate: true,
+            handler(value) {
+                if (value) {
+                    this.$emit('add-state', 'focus');
+                } else {
+                    this.$emit('remove-state', 'focus');
+                }
+            },
+        },
     },
     mounted() {
         this.registerTabTrigger(this.content.name, this.$refs.tabButton);
