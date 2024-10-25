@@ -62,11 +62,9 @@ export default {
     },
     methods: {
         handleClick() {
-            console.log('handleClick ', this.content.name);
             this.setActiveTab(this.content.name);
         },
         handleFocus() {
-            console.log('handleFocus ', this.content.name, this.activationMode);
             this.isFocused = true;
             this.setFocusTab(this.content.name);
             if (this.activationMode === 'auto') {
@@ -74,7 +72,6 @@ export default {
             }
         },
         handleBlur() {
-            console.log('handleBlur ', this.content.name);
             this.isFocused = false;
             this.onBlurTab(this.content.name);
         },
