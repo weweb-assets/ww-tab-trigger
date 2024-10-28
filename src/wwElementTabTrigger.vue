@@ -92,7 +92,7 @@ export default {
         currentName: {
             immediate: true,
             handler(newValue, oldValue) {
-                this.isMounted ? this.changeTabName(oldValue, newValue) : null;
+                this.isMounted ? this.hintChangeTabName(oldValue, newValue) : null;
             },
         },
         /* wwEditor:end */
@@ -100,25 +100,28 @@ export default {
     mounted() {
         this.registerTabTrigger(this.content.name, this.$refs.tabButton);
         /* wwEditor:start */
+        this.hintRegisterTabTrigger(this.content.name);
         this.isMounted = true;
         /* wwEditor:end */
     },
     unmounted() {
         /* wwEditor:start */
-        this.unregisterTabTrigger(this.content.name);
+        this.hintUnregisterTabTrigger(this.content.name);
         /* wwEditor:end */
     },
     inject: [
         'setActiveTab',
         'activeTabProvided',
         'registerTabTrigger',
-        /* wwEditor:start */
-        'unregisterTabTrigger',
-        'changeTabName',
-        /* wwEditor:end */
         'activationMode',
         'setFocusTab',
         'onBlurTab',
+
+        /* wwEditor:start */
+        'hintRegisterTabTrigger',
+        'hintUnregisterTabTrigger',
+        'hintChangeTabName',
+        /* wwEditor:end */
     ],
 };
 </script>
