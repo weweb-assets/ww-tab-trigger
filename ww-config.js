@@ -3,9 +3,9 @@ export default {
         label: {
             en: 'Tab trigger',
         },
-        icon: 'slider',         // 📛 TODO
+        icon: 'cursor-click',
         bubble: {
-            icon: 'slider',     // 📛 TODO
+            icon: 'cursor-click',
         },
         customSettingsPropertiesOrder: [],
         hint: (_, sidepanelContent) => {
@@ -26,6 +26,25 @@ export default {
             },
             type: 'Text',
             defaultValue: '',
+            propertyHelp: {
+                tooltip: "The name of the tab that should be activated when this is clicked.",
+            },
+        },
+        disabled: {
+            label: {
+                en: 'Disabled',
+                fr: 'Désactivé',
+            },
+            type: 'OnOff',
+            defaultValue: false,
+            section: 'settings',
+            bindable: true,
+            /* wwEditor:start */
+            bindingValidation: {
+                type: 'boolean',
+                tooltip: 'A boolean that defines if the input is disabled: `true | false`',
+            },
+            /* wwEditor:end */
         },
         tabTriggerElement: {
             hidden: true,

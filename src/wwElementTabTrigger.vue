@@ -1,6 +1,7 @@
 <template>
     <wwLayoutItemContext is-repeat :index="1" :data="{ active: isSelected }">
         <button
+            :disabled="isDisabled"
             ref="tabButton"
             role="tab"
             :aria-selected="isSelected"
@@ -44,6 +45,9 @@ export default {
     computed: {
         isSelected() {
             return this.activeTabProvided === this.content.name;
+        },
+        isDisabled() {
+            return this.content.disabled;
         },
         /* wwEditor:start */
         currentName() {
