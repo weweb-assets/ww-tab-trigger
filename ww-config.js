@@ -18,6 +18,13 @@ export default {
             }
         },
     },
+    inherit: {
+      type: "ww-layout",
+    },
+    options: {
+      autoByContent: true,
+      displayAllowedValues: ["flex", "grid"],
+    },
     states: ['active', 'focus'],
     properties: {
         name: {
@@ -29,6 +36,7 @@ export default {
             propertyHelp: {
                 tooltip: "The name of the tab that should be activated when this is clicked.",
             },
+            bindable: true,
         },
         disabled: {
             label: {
