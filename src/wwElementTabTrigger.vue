@@ -1,20 +1,20 @@
 <template>
-    <wwLayoutItemContext is-repeat :index="1" :data="{ active: isSelected }">
-        <button
-            :disabled="isDisabled"
-            ref="tabButton"
-            role="tab"
-            :aria-selected="isSelected"
-            @click="handleClick"
-            @focus="handleFocus"
-            @blur="handleBlur"
-        >
-            <wwLayout v-bind="$attrs" path="tabTriggerElement" />
-        </button>
-    </wwLayoutItemContext>
+    <wwLayout
+        v-bind="$attrs"
+        tag="button"
+        :disabled="isDisabled"
+        ref="tabButton"
+        role="tab"
+        :aria-selected="isSelected"
+        @click="handleClick"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        path="tabTriggerElement"
+    />
 </template>
 
 <script>
+import { inject, computed } from 'vue';
 /* wwEditor:start */
 import useTabTriggerHint from './editor/useTabTriggerHint';
 /* wwEditor:end */
@@ -30,6 +30,11 @@ export default {
     },
     emits: [],
     setup(props, { emit }) {
+        const activeTabProvided = inject('activeTabProvided');
+        const isSelected = computed(() => activeTabProvided.value === props.content.name);
+
+        wwLib.wwElement.useRegisterElementLocalContext('tabTrigger', { isSelected });
+
         /* wwEditor:start */
         useTabTriggerHint(emit);
         /* wwEditor:end */
@@ -43,6 +48,13 @@ export default {
         };
     },
     computed: {
+        isEditing() {
+            /* wwEditor:start */
+            return this.wwEditorState.editMode === wwLib.wwEditorHelper.EDIT_MODES.EDITION;
+            /* wwEditor:end */
+            // eslint-disable-next-line no-unreachable
+            return false;
+        },
         isSelected() {
             return this.activeTabProvided === this.content.name;
         },
@@ -57,18 +69,27 @@ export default {
     },
     methods: {
         handleClick() {
-            this.setActiveTab(this.content.name);
-        },
-        handleFocus() {
-            this.isFocused = true;
-            this.setFocusTab(this.content.name);
-            if (this.activationMode === 'auto') {
+            if (!this.isEditing) {
                 this.setActiveTab(this.content.name);
             }
         },
+        handleFocus() {
+            if (!this.isEditing) {
+                this.isFocused = true;
+                this.setFocusTab(this.content.name);
+                if (this.activationMode === 'auto') {
+                    this.setActiveTab(this.content.name);
+                }
+            }
+        },
         handleBlur() {
-            this.isFocused = false;
-            this.onBlurTab(this.content.name);
+            if (!this.isEditing) {
+                this.isFocused = false;
+                this.onBlurTab(this.content.name);
+            }
+        },
+        toggleTab() {
+            this.setActiveTab(this.content.name);
         },
     },
     watch: {
@@ -102,7 +123,7 @@ export default {
         /* wwEditor:end */
     },
     mounted() {
-        this.registerTabTrigger(this.content.name, this.$refs.tabButton);
+        this.registerTabTrigger(this.content.name, this.$refs.tabButton.$el);
         /* wwEditor:start */
         this.hintRegisterTabTrigger(this.content.name);
         this.isMounted = true;
@@ -130,5 +151,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

@@ -9,7 +9,7 @@ export default {
         },
         customSettingsPropertiesOrder: [],
         hint: (_, sidepanelContent) => {
-            if(sidepanelContent.missingTabOrField) {
+            if (sidepanelContent.missingTabOrField) {
                 return {
                     type: 'warning',
                     header: sidepanelContent.missingTabOrField.header,
@@ -19,11 +19,11 @@ export default {
         },
     },
     inherit: {
-      type: "ww-layout",
+        type: 'ww-layout',
     },
     options: {
-      autoByContent: true,
-      displayAllowedValues: ["flex", "grid"],
+        autoByContent: true,
+        displayAllowedValues: ['flex', 'grid'],
     },
     states: ['active', 'focus'],
     properties: {
@@ -34,7 +34,7 @@ export default {
             type: 'Text',
             defaultValue: '',
             propertyHelp: {
-                tooltip: "The name of the tab that should be activated when this is clicked.",
+                tooltip: 'The name of the tab that should be activated when this is clicked.',
             },
             bindable: true,
         },
@@ -56,7 +56,7 @@ export default {
         },
         tabTriggerElement: {
             hidden: true,
-            defaultValue: []
+            defaultValue: [],
         },
         /* wwEditor:start */
         missingTabOrField: {
@@ -65,5 +65,13 @@ export default {
             editorOnly: true,
         },
         /* wwEditor:end */
+        toggleTab: {
+            type: 'Button',
+            editorOnly: true,
+            options: {
+                text: { en: 'Toggle tab' },
+                action: 'toggleTab',
+            },
+        },
     },
 };
