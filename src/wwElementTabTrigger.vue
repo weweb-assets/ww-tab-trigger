@@ -62,7 +62,7 @@ export default {
             return this.content.disabled;
         },
         tag(){
-            isEditing ? 'div' : 'button'
+            this.isEditing ? 'div' : 'button'
         },
         /* wwEditor:start */
         currentName() {
