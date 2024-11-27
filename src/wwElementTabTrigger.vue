@@ -1,7 +1,7 @@
 <template>
     <wwLayout
         v-bind="$attrs"
-        :tag="this.tag"
+        :tag="isEditing ? 'div' : 'button'"
         :disabled="isDisabled"
         ref="tabButton"
         role="tab"
