@@ -1,7 +1,7 @@
 <template>
     <wwLayout
         v-bind="$attrs"
-        tag="button"
+        :tag="tag"
         :disabled="isDisabled"
         ref="tabButton"
         role="tab"
@@ -60,6 +60,9 @@ export default {
         },
         isDisabled() {
             return this.content.disabled;
+        },
+        tag(){
+            isEditing ? 'div' : 'button'
         },
         /* wwEditor:start */
         currentName() {
