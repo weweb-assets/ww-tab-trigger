@@ -62,7 +62,9 @@ export default {
             return this.content.disabled;
         },
         tag(){
-            this.isEditing ? 'div' : 'button'
+            return this.isEditing ? 'div' : 'button'
+            // eslint-disable-next-line no-unreachable
+            return 'button';
         },
         /* wwEditor:start */
         currentName() {
