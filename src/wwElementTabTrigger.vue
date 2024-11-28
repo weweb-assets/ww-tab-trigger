@@ -74,6 +74,7 @@ export default {
         },
         handleFocus() {
             if (!this.isEditing) {
+                this.enableListeners();
                 this.isFocused = true;
                 this.setFocusTab(this.content.name);
                 if (this.activationMode === 'auto') {
@@ -83,6 +84,7 @@ export default {
         },
         handleBlur() {
             if (!this.isEditing) {
+                this.destroyListeners();
                 this.isFocused = false;
                 this.onBlurTab(this.content.name);
             }
@@ -134,6 +136,8 @@ export default {
         /* wwEditor:end */
     },
     inject: [
+        'enableListeners',
+        'destroyListeners',
         'setActiveTab',
         'activeTabProvided',
         'registerTabTrigger',
