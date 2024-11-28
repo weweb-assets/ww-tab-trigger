@@ -1,6 +1,5 @@
 <template>
     <wwLayout
-        v-bind="$attrs"
         :tag="isEditing ? 'div' : 'button'"
         :disabled="isDisabled"
         ref="tabButton"
@@ -60,11 +59,6 @@ export default {
         },
         isDisabled() {
             return this.content.disabled;
-        },
-        tag(){
-            return this.isEditing ? 'div' : 'button'
-            // eslint-disable-next-line no-unreachable
-            return 'button';
         },
         /* wwEditor:start */
         currentName() {

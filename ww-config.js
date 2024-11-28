@@ -9,13 +9,7 @@ export default {
         },
         customSettingsPropertiesOrder: [],
         hint: (_, sidepanelContent) => {
-            if (sidepanelContent.missingTabOrField) {
-                return {
-                    type: 'warning',
-                    header: sidepanelContent.missingTabOrField.header,
-                    text: sidepanelContent.missingTabOrField.text,
-                };
-            }
+            return sidepanelContent.missingTabOrField;
         },
     },
     inherit: {
