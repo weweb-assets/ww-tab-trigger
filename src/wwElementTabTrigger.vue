@@ -36,7 +36,6 @@ export default {
     },
     data() {
         return {
-            isFocused: false,
             /* wwEditor:start */
             isMounted: false,
             /* wwEditor:end */
@@ -60,38 +59,16 @@ export default {
             this.setActiveTab(this.content.name);
         },
         handleFocus() {
-            this.isFocused = true;
             this.setFocusTab(this.content.name);
             if (this.activationMode === 'auto') {
                 this.setActiveTab(this.content.name);
             }
         },
         handleBlur() {
-            this.isFocused = false;
             this.onBlurTab(this.content.name);
         },
     },
     watch: {
-        isSelected: {
-            immediate: true,
-            handler(value) {
-                if (value) {
-                    this.$emit('add-state', 'active');
-                } else {
-                    this.$emit('remove-state', 'active');
-                }
-            },
-        },
-        isFocused: {
-            immediate: true,
-            handler(value) {
-                if (value) {
-                    this.$emit('add-state', 'focus');
-                } else {
-                    this.$emit('remove-state', 'focus');
-                }
-            },
-        },
         /* wwEditor:start */
         currentName: {
             immediate: true,
