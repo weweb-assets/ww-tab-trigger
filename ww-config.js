@@ -25,7 +25,10 @@ export default {
       autoByContent: true,
       displayAllowedValues: ["flex", "grid"],
     },
-    states: ['active', 'focus'],
+    states: [
+        { label: 'active', selector: '&[aria-selected="true"]' },
+        { label: 'focus', selector: '&:focus' },
+    ],
     properties: {
         name: {
             label: {
